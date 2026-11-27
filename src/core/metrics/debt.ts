@@ -1,8 +1,12 @@
 import type { DebtReport, MarkerCount } from '../../types.ts';
 import type { FileSample } from '../files.ts';
+import { extensionOf } from './size.ts';
 
 const DEFAULT_TOP = 5;
 const BIG_FILE_LINES = 400;
+
+/** Documentation TODO/FIXME entries are roadmap notes, not code debt. */
+const DOCUMENTATION_EXTENSIONS = new Set(['md', 'markdown', 'rst', 'txt', 'adoc']);
 
 const MARKERS: { kind: string; pattern: RegExp }[] = [
   { kind: 'TODO', pattern: /\bTODO\b/g },
@@ -24,6 +28,7 @@ export function buildDebt(samples: FileSample[], totalLines: number, options: { 
 
   for (const sample of samples) {
     if (!sample.text) continue;
+    if (DOCUMENTATION_EXTENSIONS.has(extensionOf(sample.path))) continue;
 
     let fileCount = 0;
     for (const { kind, pattern } of MARKERS) {

@@ -73,7 +73,8 @@ function scoreStructure(result: ScanResult): DimensionScore {
 
 function scoreDebt(result: ScanResult): DimensionScore {
   const { markerCount, density } = result.debt;
-  const score = 100 * clamp01(1 - density / 10);
+  // 1-3 markers per KLOC is normal; 12+ means the codebase is vocal about its pain.
+  const score = 100 * clamp01(1 - density / 12);
   return {
     key: 'debt',
     label: '技术债',
