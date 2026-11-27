@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>orbit-api · repo-audit 报告</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --border: #30363d; --text: #e6edf3; --muted: #7d8590;
+    --green: #3fb950; --yellow: #d29922; --red: #f85149; --accent: #58a6ff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 20px 64px; background: var(--bg); color: var(--text);
+         font: 14px/1.6 -apple-system, "Segoe UI", "Microsoft YaHei", system-ui, sans-serif; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  header { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+  h1 { font-size: 22px; margin: 0; }
+  .path { color: var(--muted); font-size: 12px; word-break: break-all; }
+  .score-ring { margin-left: auto; text-align: center; }
+  .score-ring b { display: block; font-size: 40px; line-height: 1; }
+  .score-ring span { color: var(--muted); font-size: 12px; }
+  .grade { font-weight: 700; letter-spacing: .08em; }
+  .verdict { color: var(--muted); margin: 12px 0 24px; }
+  h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted);
+       margin: 32px 0 12px; font-weight: 600; }
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .metric { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .metric-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .metric p { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+  .track { height: 6px; background: #21262d; border-radius: 3px; overflow: hidden; }
+  .track i { display: block; height: 100%; border-radius: 3px; }
+  .good { color: var(--green); } .warn { color: var(--yellow); } .bad { color: var(--red); }
+  .track i.good { background: var(--green); } .track i.warn { background: var(--yellow); } .track i.bad { background: var(--red); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .stat { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dashed #21262d; }
+  .stat:last-child { border-bottom: 0; }
+  .stat span { color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #21262d; }
+  th { color: var(--muted); font-weight: 500; }
+  td:first-child { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; word-break: break-all; }
+  code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; color: var(--accent); }
+  ul.checks { list-style: none; margin: 0; padding: 0; }
+  ul.checks li { display: grid; grid-template-columns: 20px 120px 1fr; gap: 8px; padding: 5px 0;
+                 border-bottom: 1px solid #21262d; align-items: baseline; }
+  ul.checks li:last-child { border-bottom: 0; }
+  ul.checks .detail { color: var(--muted); font-size: 12px; }
+  ul.checks .ok .mark { color: var(--green); } ul.checks .missing .mark { color: var(--red); }
+  .row { display: grid; grid-template-columns: 140px 1fr 90px; gap: 10px; align-items: center; padding: 3px 0; }
+  .row-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row-bar { height: 6px; background: #21262d; border-radius: 3px; overflow: hidden; }
+  .row-bar i { display: block; height: 100%; background: var(--accent); }
+  .row-value { color: var(--muted); font-size: 12px; text-align: right; }
+  ol.advice { margin: 0; padding-left: 22px; }
+  ol.advice li { margin: 6px 0; }
+  footer { margin-top: 40px; color: var(--muted); font-size: 12px; }
+  @media print { body { background: #fff; color: #111; } .card, .metric { border-color: #ddd; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>orbit-api</h1>
+      <div class="path">C:/Users/Lenovo/Documents/demo/orbit-api</div>
+    </div>
+    <div class="score-ring">
+      <b class="good">92.4</b>
+      <span>/ 100 · <span class="grade">A+</span></span>
+    </div>
+  </header>
+  <p class="verdict">工程化水平优秀，可以直接放进简历。</p>
+
+  <h2>维度得分</h2>
+  <div class="metrics">
+<div class="metric">
+        <div class="metric-head">
+          <span>活跃度</span>
+          <b class="good">82.5</b>
+        </div>
+        <div class="track"><i class="good" style="width:82.5%"></i></div>
+        <p>近 90 天 25 次提交，累计 42 次，bus factor 2</p>
+      </div>
+<div class="metric">
+        <div class="metric-head">
+          <span>工程规范</span>
+          <b class="good">100.0</b>
+        </div>
+        <div class="track"><i class="good" style="width:100%"></i></div>
+        <p>8/8 项检查通过</p>
+      </div>
+<div class="metric">
+        <div class="metric-head">
+          <span>代码结构</span>
+          <b class="warn">67.5</b>
+        </div>
+        <div class="track"><i class="warn" style="width:67.5%"></i></div>
+        <p>140 行 / 13 个文件，最大单文件 21 行</p>
+      </div>
+<div class="metric">
+        <div class="metric-head">
+          <span>技术债</span>
+          <b class="good">100.0</b>
+        </div>
+        <div class="track"><i class="good" style="width:100%"></i></div>
+        <p>0 处 TODO/FIXME，密度 0.00 处/千行</p>
+      </div>
+<div class="metric">
+        <div class="metric-head">
+          <span>提交质量</span>
+          <b class="good">100.0</b>
+        </div>
+        <div class="track"><i class="good" style="width:100%"></i></div>
+        <p>规范提交 100%，低质量信息 0%，平均 36 字符</p>
+      </div>
+  </div>
+
+  <h2>活跃度</h2>
+  <div class="card">
+    <div class="stat"><span>累计提交</span><b>42</b></div>
+    <div class="stat"><span>近 30 天</span><b>9</b></div>
+    <div class="stat"><span>近 90 天</span><b>25</b></div>
+    <div class="stat"><span>活跃天数</span><b>42</b></div>
+    <div class="stat"><span>首次 / 最后提交</span><b>2026-06-30 → 2026-11-27</b></div>
+    <div class="stat"><span>Bus factor</span><b>2</b></div>
+    <div style="margin-top:14px"><svg viewBox="0 0 828 140" width="100%" height="140" role="img" aria-label="weekly commits">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7ee787"/>
+      <stop offset="100%" stop-color="#2ea043"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>09-07: 2026-09-07 当周 2 次提交</title></rect>
+  <text x="31.5" y="134" font-size="10" fill="#7d8590" text-anchor="middle">09-07</text>
+  <rect x="69" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>09-14: 2026-09-14 当周 2 次提交</title></rect>
+  <rect x="138" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>09-21: 2026-09-21 当周 2 次提交</title></rect>
+  <text x="169.5" y="134" font-size="10" fill="#7d8590" text-anchor="middle">09-21</text>
+  <rect x="207" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>09-28: 2026-09-28 当周 2 次提交</title></rect>
+  <rect x="276" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>10-05: 2026-10-05 当周 2 次提交</title></rect>
+  <text x="307.5" y="134" font-size="10" fill="#7d8590" text-anchor="middle">10-05</text>
+  <rect x="345" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>10-12: 2026-10-12 当周 2 次提交</title></rect>
+  <rect x="414" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>10-19: 2026-10-19 当周 2 次提交</title></rect>
+  <text x="445.5" y="134" font-size="10" fill="#7d8590" text-anchor="middle">10-19</text>
+  <rect x="483" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>10-26: 2026-10-26 当周 2 次提交</title></rect>
+  <rect x="552" y="64" width="63" height="56" rx="3" fill="url(#grad)"><title>11-02: 2026-11-02 当周 1 次提交</title></rect>
+  <text x="583.5" y="134" font-size="10" fill="#7d8590" text-anchor="middle">11-02</text>
+  <rect x="621" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>11-09: 2026-11-09 当周 2 次提交</title></rect>
+  <rect x="690" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>11-16: 2026-11-16 当周 2 次提交</title></rect>
+  <text x="721.5" y="134" font-size="10" fill="#7d8590" text-anchor="middle">11-16</text>
+  <rect x="759" y="8" width="63" height="112" rx="3" fill="url(#grad)"><title>11-23: 2026-11-23 当周 2 次提交</title></rect>
+</svg></div>
+    <div style="margin-top:14px"><div class="row">
+        <span class="row-name" title="Lin Wei">Lin Wei</span>
+        <span class="row-bar"><i style="width:57.1%"></i></span>
+        <span class="row-value">24 · 57%</span>
+      </div>
+<div class="row">
+        <span class="row-name" title="Zhang Yu">Zhang Yu</span>
+        <span class="row-bar"><i style="width:28.6%"></i></span>
+        <span class="row-value">12 · 29%</span>
+      </div>
+<div class="row">
+        <span class="row-name" title="Chen Mo">Chen Mo</span>
+        <span class="row-bar"><i style="width:14.3%"></i></span>
+        <span class="row-value">6 · 14%</span>
+      </div></div>
+  </div>
+
+  <h2>代码规模</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="stat"><span>文件</span><b>13</b></div>
+      <div class="stat"><span>总行数</span><b>140</b></div>
+      <div class="stat"><span>总体积</span><b>2.9 KB</b></div>
+      <div class="stat"><span>二进制文件</span><b>0</b></div>
+    </div>
+    <div class="card">
+      <table><thead><tr><th>扩展名</th><th>文件</th><th>行数</th></tr></thead><tbody>
+<tr><td><code>.ts</code></td><td>6</td><td>79</td></tr>
+<tr><td><code>.md</code></td><td>3</td><td>35</td></tr>
+<tr><td><code>.no-ext</code></td><td>2</td><td>10</td></tr>
+<tr><td><code>.yml</code></td><td>1</td><td>10</td></tr>
+<tr><td><code>.json</code></td><td>1</td><td>6</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <h2>最大的文件</h2>
+  <div class="card"><table><thead><tr><th>路径</th><th>行数</th><th>大小</th></tr></thead><tbody>
+<tr><td><code>src/repository.ts</code></td><td>21</td><td>387 B</td></tr>
+<tr><td><code>README.md</code></td><td>20</td><td>329 B</td></tr>
+<tr><td><code>src/router.ts</code></td><td>18</td><td>522 B</td></tr>
+<tr><td><code>test/repository.test.ts</code></td><td>11</td><td>306 B</td></tr>
+<tr><td><code>test/router.test.ts</code></td><td>11</td><td>331 B</td></tr>
+  </tbody></table></div>
+
+  <h2>工程规范</h2>
+  <div class="card"><ul class="checks">
+<li class="ok">
+        <span class="mark">✓</span>
+        <span class="label">README</span>
+        <span class="detail">项目的第一印象，面试官 15 秒内唯一会看的文件</span>
+      </li>
+<li class="ok">
+        <span class="mark">✓</span>
+        <span class="label">LICENSE</span>
+        <span class="detail">检测到 MIT</span>
+      </li>
+<li class="ok">
+        <span class="mark">✓</span>
+        <span class="label">.gitignore</span>
+        <span class="detail">避免把 node_modules、构建产物、密钥提交进仓库</span>
+      </li>
+<li class="ok">
+        <span class="mark">✓</span>
+        <span class="label">CI 配置</span>
+        <span class="detail">发现 1 个 workflow</span>
+      </li>
+<li class="ok">
+        <span class="mark">✓</span>
+        <span class="label">测试</span>
+        <span class="detail">存在测试目录或用例文件</span>
+      </li>
+<li class="ok">
+        <span class="mark">✓</span>
+        <span class="label">依赖清单</span>
+        <span class="detail">有构建/依赖元数据，可复现</span>
+      </li>
+<li class="ok">
+        <span class="mark">✓</span>
+        <span class="label">文档目录</span>
+        <span class="detail">有 docs/ 目录</span>
+      </li>
+<li class="ok">
+        <span class="mark">✓</span>
+        <span class="label">CHANGELOG</span>
+        <span class="detail">有变更记录</span>
+      </li>
+  </ul></div>
+
+  <h2>技术债</h2>
+  <div class="card">
+    <div class="stat"><span>TODO / FIXME 总数</span><b>0</b></div>
+    <div class="stat"><span>密度（处 / 千行）</span><b>0.00</b></div>
+    
+  </div>
+
+  <h2>提交质量</h2>
+  <div class="card">
+    <div class="stat"><span>Conventional Commits 占比</span><b>100%</b></div>
+    <div class="stat"><span>低质量提交信息</span><b>0%</b></div>
+    <div class="stat"><span>平均标题长度</span><b>36 字符</b></div>
+  </div>
+
+  
+
+  <footer>repo-audit v0.1.0 · 生成于 2026-11-27T13:54:49.085Z</footer>
+</div>
+</body>
+</html>

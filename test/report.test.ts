@@ -48,9 +48,9 @@ test('terminal report renders every section without colour codes when disabled',
   }
 });
 
-test('cli writes a JSON document and an HTML file', () => {
+test('cli writes a JSON document and an HTML file, creating missing folders', () => {
   const repo = makeHealthyRepo();
-  const reportPath = join(repo.dir, 'report.html');
+  const reportPath = join(repo.dir, 'out', 'nested', 'report.html');
   try {
     const stdout = execFileSync(process.execPath, ['src/cli.ts', repo.dir, '--json'], {
       cwd: process.cwd(),
@@ -67,7 +67,6 @@ test('cli writes a JSON document and an HTML file', () => {
     const html = readFileSync(reportPath, 'utf8');
     assert.match(html, /<!doctype html>/i);
   } finally {
-    rmSync(reportPath, { force: true });
     repo.cleanup();
   }
 });

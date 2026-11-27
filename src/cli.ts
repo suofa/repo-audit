@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import process from 'node:process';
 import { scanRepository, NotARepositoryError } from './core/scan.ts';
 import { scoreScan } from './core/score.ts';
@@ -159,6 +159,7 @@ export function main(argv: string[] = process.argv.slice(2)): number {
 
     if (args.html) {
       const file = resolve(args.html);
+      mkdirSync(dirname(file), { recursive: true });
       writeFileSync(file, renderHtml(result, score), 'utf8');
       if (!args.json) process.stderr.write(`HTML 报告已写入 ${file}\n`);
     }
