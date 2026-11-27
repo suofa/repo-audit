@@ -1,0 +1,44 @@
+{
+  "name": "repo-audit",
+  "version": "0.1.0",
+  "description": "Scan any git repository and score its engineering health: activity, hygiene, technical debt and commit quality.",
+  "keywords": [
+    "git",
+    "cli",
+    "audit",
+    "metrics",
+    "code-health",
+    "report"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "bin": {
+    "repo-audit": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "node src/cli.ts",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}
